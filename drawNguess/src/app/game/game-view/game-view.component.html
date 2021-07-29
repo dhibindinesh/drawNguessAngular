@@ -1,0 +1,11 @@
+<div class="container mx-auto">
+    <div class="dng-canvas-container ">
+        <canvas #game width="640" height="640" class="canvas"></canvas>
+    </div>
+    <div class="dng-controls-container">
+        <button class="btn-primary" (click)="move('right')">Right</button>
+        <button class="btn-primary" (click)="move('left')">Left</button>
+        <button class="btn-primary" (click)="move('up')">Up</button>
+        <button class="btn-primary" (click)="move('down')">Down</button>
+    </div>
+</div>
