@@ -5,6 +5,8 @@ import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { GameViewComponent } from './game-view/game-view.component';
+import { SharedModule } from '../shared/shared.module';
+import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { GameViewComponent } from './game-view/game-view.component';
   ],
   imports: [
     CommonModule,
-    GameRoutingModule
+    GameRoutingModule,
+    SharedModule,
+    CanvasWhiteboardModule
   ]
 })
 export class GameModule { }
