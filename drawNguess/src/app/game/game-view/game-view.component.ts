@@ -44,14 +44,29 @@ export class GameViewComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     // this.game_context = this.game_canvas.nativeElement.getContext("2d")
+    this.socket.on("connect", canvas => {
+      if (canvas != null) {
+        this._canvasWhiteboardService.drawCanvas(canvas);
+      }
+    })
     this.socket.on("canvas", batch_updates => {
-      console.log(batch_updates)
+      // console.log(batch_updates)
       if (batch_updates != null) {
         this._canvasWhiteboardService.drawCanvas(batch_updates);
       }
-
     })
-
+    this.socket.on("clear", e => {
+      console.log(e)
+      this._canvasWhiteboardService.clearCanvas()
+    })
+    this.socket.on("undo", e => {
+      console.log(e)
+      this._canvasWhiteboardService.undoCanvas(e)
+    })
+    this.socket.on("redo", e => {
+      console.log(e)
+      this._canvasWhiteboardService.redoCanvas(e)
+    })
   }
 
 
@@ -60,13 +75,17 @@ export class GameViewComponent implements OnInit {
     this.socket.emit("draw", e)
   }
   onCanvasClear() {
+
     console.log('onCanvasClear')
+    this.socket.emit("clear")
   }
   onCanvasUndo(e) {
     console.log('onCanvasUndo', e)
+    this.socket.emit('undo', e)
   }
   onCanvasRedo(e) {
     console.log('onCanvasRedo', e)
+    this.socket.emit('redo', e)
   }
 
 }
